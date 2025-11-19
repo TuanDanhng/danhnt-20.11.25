@@ -2,198 +2,228 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Mừng Ngày 20/11</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tri Ân Thầy Cô 20/11</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #ffd700; /* Màu vàng kim */
+            --accent: #ff4757;  /* Màu đỏ hồng */
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Nunito', sans-serif;
-            overflow: hidden;
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            font-family: 'Montserrat', sans-serif;
             height: 100vh;
+            overflow: hidden;
+            background: #0f0c29; 
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
         }
 
-        /* Màn hình chờ */
-        #intro-screen {
+        /* Hiệu ứng nền đốm sáng bay */
+        .bg-particles {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: floatUp linear infinite;
+        }
+
+        /* Màn hình chờ - Hộp quà 3D */
+        #intro {
+            position: absolute;
             z-index: 10;
-            transition: opacity 1s ease;
-        }
-
-        .envelope {
-            width: 120px;
-            height: 80px;
-            background: #ff6f61;
-            position: relative;
-            border-radius: 0 0 10px 10px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            animation: float 3s ease-in-out infinite;
-        }
-        .envelope:before {
-            content: ''; position: absolute; top: 0; left: 0;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-top: 40px solid #ff8a80;
-        }
-        .btn-open {
-            margin-top: 30px;
-            padding: 12px 30px;
-            background: white;
-            color: #ff6f61;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .btn-open:active { transform: scale(0.95); }
-
-        /* Nội dung chính */
-        #main-content {
-            display: none;
             text-align: center;
+            transition: all 0.8s ease-in-out;
+        }
+        
+        .gift-box {
+            font-size: 80px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+            transition: transform 0.3s;
+        }
+        .gift-box:hover { transform: scale(1.1); }
+        
+        .tap-hint {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Nội dung chính - Thẻ kính mờ */
+        #card {
             position: relative;
             z-index: 5;
-            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px 30px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transform: scale(0.8) translateY(50px);
             opacity: 0;
-            transition: opacity 1.5s ease;
+            visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #card.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            visibility: visible;
         }
 
         h1 {
-            font-family: 'Dancing Script', cursive;
-            color: #d63384;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ffd700, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .divider {
+            height: 2px;
+            width: 60px;
+            background: var(--accent);
+            margin: 0 auto 25px;
+            border-radius: 2px;
         }
 
         p {
-            font-size: 1.2rem;
-            color: #555;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto 20px;
-            background: rgba(255,255,255,0.8);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
         }
 
-        /* Hiệu ứng hoa nở CSS */
-        .flower-wrapper {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-top: 20px;
         }
-        .flower {
-            width: 100%; height: 100%;
-            background: radial-gradient(circle, #ffeb3b 20%, #ff4081 100%);
-            border-radius: 50%;
-            position: relative;
-            transform: scale(0);
-            animation: bloom 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            box-shadow: 0 0 20px rgba(255, 64, 129, 0.5);
-        }
-        .petal {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: inherit;
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        .petal:nth-child(1) { transform: rotate(45deg); }
-        .petal:nth-child(2) { transform: rotate(90deg); }
-        .petal:nth-child(3) { transform: rotate(135deg); }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        @keyframes bloom { from { transform: scale(0); } to { transform: scale(1); } }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            p { font-size: 1rem; }
+        /* Animation Keyframes */
+        @keyframes floatUp {
+            from { transform: translateY(100vh) scale(0); opacity: 0; }
+            to { transform: translateY(-10vh) scale(1); opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <div id="intro-screen">
-        <div class="envelope" onclick="openGift()"></div>
-        <button class="btn-open" onclick="openGift()">Nhấn để mở quà 🎁</button>
+    <div class="bg-particles" id="particles"></div>
+
+    <div id="intro" onclick="openCard()">
+        <div class="gift-box">🎁</div>
+        <div class="tap-hint">Chạm để mở lời chúc</div>
     </div>
 
-    <div id="main-content">
-        <div class="flower-wrapper">
-            <div class="flower">
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-            </div>
-        </div>
-        <h1>Chúc Mừng 20/11</h1>
+    <div id="card">
+        <h1>Happy Teacher's Day<br>20/11</h1>
+        <div class="divider"></div>
         <p>
-            "Người thầy, vẫn lặng lẽ đi về sớm trưa.<br>
-            Từng ngày, giọt mồ hôi rơi nhòe trang giấy."<br><br>
-            Nhân ngày Nhà giáo Việt Nam, em xin gửi đến Thầy/Cô lời tri ân sâu sắc nhất. 
-            Cảm ơn Thầy/Cô đã luôn là ngọn hải đăng soi sáng, dẫn lối cho chúng em đến bến bờ tri thức.
-            Chúc Thầy/Cô luôn mạnh khỏe, hạnh phúc và giữ mãi ngọn lửa đam mê với nghề! ❤️
+            "Nhân ngày Nhà giáo Việt Nam, xin gửi lời tri ân chân thành nhất đến những 'Người lái đò' thầm lặng."
+            <br><br>
+            Kính chúc Quý Thầy Cô luôn dồi dào sức khỏe, tràn đầy hạnh phúc và mãi giữ vững ngọn lửa đam mê với sự nghiệp trồng người cao cả.
         </p>
+        <div class="signature">Trân trọng & Biết ơn! ❤️</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
-        function openGift() {
-            const intro = document.getElementById('intro-screen');
-            const main = document.getElementById('main-content');
+        // Tạo hiệu ứng đốm sáng nền (Particles)
+        const particleContainer = document.getElementById('particles');
+        for(let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.left = Math.random() * 100 + '%';
+            p.style.width = Math.random() * 10 + 5 + 'px';
+            p.style.height = p.style.width;
+            p.style.animationDuration = Math.random() * 10 + 5 + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            particleContainer.appendChild(p);
+        }
 
-            // Hiệu ứng mờ dần màn hình chờ
+        // Hàm mở thiệp
+        function openCard() {
+            const intro = document.getElementById('intro');
+            const card = document.getElementById('card');
+            
+            // 1. Ẩn hộp quà
+            intro.style.transform = 'scale(0) rotate(360deg)';
             intro.style.opacity = '0';
             
             setTimeout(() => {
                 intro.style.display = 'none';
-                main.style.display = 'block';
                 
-                // Kích hoạt hiệu ứng hiện dần nội dung
-                setTimeout(() => {
-                    main.style.opacity = '1';
-                    launchConfetti(); // Bắn pháo hoa
-                }, 50);
-            }, 1000);
+                // 2. Hiện thiệp
+                card.classList.add('active');
+                
+                // 3. Bắn pháo hoa hoành tráng
+                fireworksDisplay();
+            }, 500);
         }
 
-        function launchConfetti() {
-            // Bắn pháo hoa giấy lung linh
-            var duration = 3000;
-            var animationEnd = Date.now() + duration;
-            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        // Hiệu ứng pháo hoa hiện đại (bắn từ 2 bên)
+        function fireworksDisplay() {
+            var end = Date.now() + (4 * 1000); // Kéo dài 4 giây
 
-            var interval = setInterval(function() {
-                var timeLeft = animationEnd - Date.now();
+            var colors = ['#ffeb3b', '#ffffff', '#ff4757']; // Vàng, Trắng, Đỏ
 
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.8 }, // Bắn từ góc trái dưới
+                    colors: colors,
+                    zIndex: 100
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.8 }, // Bắn từ góc phải dưới
+                    colors: colors,
+                    zIndex: 100
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
                 }
-
-                var particleCount = 50 * (timeLeft / duration);
-                
-                // Bắn từ 2 bên ngẫu nhiên
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
-            }, 250);
+            }());
         }
     </script>
 </body>
